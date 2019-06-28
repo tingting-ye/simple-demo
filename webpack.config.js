@@ -12,16 +12,29 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
+  devServer: {
+    //本地服务器所加载的页面所在的目录(当index.html在dist中，则用注释内容)
+    contentBase: path.resolve(__dirname, "dist"),
+    //一切服务都启用gzip 压缩
+    compress: true, 
+    // 端口号
+    port: 8080, 
+    // 默认打开页面
+    open: true 
+  },
   module: {
     rules: [{
-      enforce: "pre", // 编译前检查
+      // 编译前检查
+      enforce: "pre", 
       test: /\.js$/,
       exclude: /node_modules/,
       loader: "eslint-loader",
       options: {
-        formatter: eslintFormatter // 默认的错误提示方式
+        // 默认的错误提示方式
+        formatter: eslintFormatter 
       },
-      include: [path.resolve(__dirname, "src")] // 指定检查的目录
+      // 指定检查的目录
+      include: [path.resolve(__dirname, "src")] 
     },
     {
       // 正则表达式
@@ -32,15 +45,15 @@ module.exports = {
         // loaders的元素执行顺序是从右往左
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env"], // ES2015+转换为es5
-          plugins: ["@babel/plugin-transform-react-jsx"], // 转化JSX语法
-          cacheDirectory: true // 利用缓存，提高性能
+          // ES2015+转换为es5
+          presets: ["@babel/preset-env"], 
+          // 转化JSX语法
+          plugins: ["@babel/plugin-transform-react-jsx"], 
+          // 利用缓存，提高性能
+          cacheDirectory: true 
         }
       }
     }
     ]
-  },
-  devServer: {
-    overlay: true
   }
 };
