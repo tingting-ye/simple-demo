@@ -11,7 +11,11 @@ module.exports = {
   ],
   parser: "babel-eslint",
   parserOptions: {
-    sourceType: 'module' // 按照模块的方式解析
+    sourceType: 'module', // 按照模块的方式解析
+    ecmaVersion: 6, // 指定ECMAScript支持的版本，6为ES6  
+    ecmaFeatures : {
+      jsx: true // 启动JSX
+    }
   },
   env: {
     browser: true, // 开发环境配置表示可以使用浏览器的方法
