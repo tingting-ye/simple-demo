@@ -7,7 +7,6 @@ export default class HelloWorld extends React.Component {
   }
 
   render() {
-    debugger;
     const myName = "I‘m YTT";
     return (
       <div>Hello World { myName }</div>
