@@ -36,7 +36,7 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
-              // ES2015+转换为es5
+              // 据配置的目标浏览器或者运行环境来自动将ES2015+的代码转换为es5
               presets: ["@babel/preset-env"], 
               // 转化JSX语法
               plugins: ["@babel/plugin-transform-react-jsx"]
