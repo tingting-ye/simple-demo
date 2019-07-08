@@ -12,6 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
+  // webpack-dev-server 能够用于快速开发应用程序
   devServer: {
     //本地服务器所加载的页面所在的目录(当index.html在dist中，则用注释内容)
     contentBase: path.resolve(__dirname, "dist"),
@@ -23,37 +24,33 @@ module.exports = {
     open: true 
   },
   module: {
-    rules: [{
-      // 编译前检查
-      enforce: "pre", 
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "eslint-loader",
-      options: {
-        // 默认的错误提示方式
-        formatter: eslintFormatter 
-      },
-      // 指定检查的目录
-      include: [path.resolve(__dirname, "src")] 
-    },
-    {
+    rules: [
+      {
       // 正则表达式
-      test: /\.(js|jsx)$/,
-      // node_modules目录下的文件除外
-      exclude: /node_modules/,
-      use: {
-        // loaders的元素执行顺序是从右往左
-        loader: "babel-loader",
-        options: {
-          // ES2015+转换为es5
-          presets: ["@babel/preset-env"], 
-          // 转化JSX语法
-          plugins: ["@babel/plugin-transform-react-jsx"], 
-          // 利用缓存，提高性能
-          cacheDirectory: true 
-        }
+        test: /\.(js|jsx)$/,
+        // node_modules目录下的文件除外
+        exclude: /node_modules/,
+        // 指定检查的目录
+        include: [path.resolve(__dirname, "src")],
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              // ES2015+转换为es5
+              presets: ["@babel/preset-env"], 
+              // 转化JSX语法
+              plugins: ["@babel/plugin-transform-react-jsx"]
+            }
+          },
+          {
+            loader: "eslint-loader",
+            options: {
+              // 默认的错误提示方式
+              formatter: eslintFormatter 
+            }
+          }
+        ]
       }
-    }
     ]
   }
 };
