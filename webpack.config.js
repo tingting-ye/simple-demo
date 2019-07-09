@@ -1,6 +1,6 @@
 const path = require("path");
 const eslintFormatter = require("eslint-friendly-formatter");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // 打包环境
@@ -9,15 +9,16 @@ module.exports = {
   entry: "./src/index.jsx",
   // 文件打包出口
   output: {
-    // __dirname 指向webpack.config.js文件的绝对路径
+    // __dirname 是node.js中的一个全局变量，它指向当前执行脚本所在的目录
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
+    // publicPath: "/dist/"  // webpack-dev-server的根目录是相对publicPath这个路径的,影响index.html的script的路径
   },
   // webpack-dev-server 能够用于快速开发应用程序
   devServer: {
     // contentBase不设置的话，默认是当前执行的目录，一般是项目根目录。会在项目根目录查找index.html文件
     // contentBase: path.resolve(__dirname, "dist"),
-    // contentBase: "./",
+    // contentBase: "./", // index 的路径
     //一切服务都启用gzip 压缩
     compress: true, 
     // 端口号
@@ -54,11 +55,11 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "index.html"
-    })
-  ]
+  }
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     filename: "index.html",
+  //     template: "index.html"
+  //   })
+  // ]
 };
