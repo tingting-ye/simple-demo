@@ -13,6 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
     // publicPath: "/dist/"  // webpack-dev-server的根目录是相对publicPath这个路径的,影响index.html的script的路径
+    //（个人理解：publicPath决定index.html引用bundle.js的路径，不设置，默认是index.html同级目录）
   },
   // webpack-dev-server 能够用于快速开发应用程序
   devServer: {
