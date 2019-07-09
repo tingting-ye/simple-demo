@@ -1,5 +1,6 @@
 const path = require("path");
 const eslintFormatter = require("eslint-friendly-formatter");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // 打包环境
@@ -14,8 +15,9 @@ module.exports = {
   },
   // webpack-dev-server 能够用于快速开发应用程序
   devServer: {
-    //本地服务器所加载的页面所在的目录(当index.html在dist中，则用注释内容)
-    contentBase: path.resolve(__dirname, "dist"),
+    // contentBase不设置的话，默认是当前执行的目录，一般是项目根目录。会在项目根目录查找index.html文件
+    // contentBase: path.resolve(__dirname, "dist"),
+    // contentBase: "./",
     //一切服务都启用gzip 压缩
     compress: true, 
     // 端口号
@@ -52,5 +54,11 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "index.html"
+    })
+  ]
 };
